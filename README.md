@@ -1,6 +1,3 @@
-
-# ScientificModelling2021-2022-2
-
 # Scientific Modelling 2021-2022-2
 
 ## Advisor(s):
