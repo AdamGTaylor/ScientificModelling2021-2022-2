@@ -1,5 +1,6 @@
 data/*.json
-
+data/*.csv
+data/*
 
 # Prerequisites
 *.d
