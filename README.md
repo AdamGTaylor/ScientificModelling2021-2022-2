@@ -9,22 +9,38 @@
 
 ## Biweekly report 1 (report & presenation)
 
-    21st of February
+    1 week
+    DL: 21st of February
 
 ## Biweekly report 2 (report & presenation)
 
-    6th of March
+    2 weeks
+    DL: 6th of March (22:00)
 
 ## Midterm report (report & presentation & cover letter & code)
 
-    27th of March
+    3 weeks
+    DL: 27th of March (22:00)
 
 ## Biweekly report 3 (report & presenation)
 
-    10th of April
+    2 weeks
+    DL: 10th of April (22:00)
 
 ## Biweekly report 4 (report & presenation)
 
-    24th of April
+    2 weeks
+    DL: 24th of April (22:00)
 
 ## Final Report (report & presentation & cover letter & code)
+
+    2 weeks
+    DL: 8th of May (22:00)
+
+
+## ISSUES
+
+    Still don't get how to go around the 5000 publication limit.
+    Didn't really find it in the API documentation while I have worked
+    with ReST API before and making query with an url is not some alien 
+    technology.
