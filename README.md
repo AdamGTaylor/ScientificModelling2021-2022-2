@@ -1,18 +1,19 @@
-# Scientific Modelling 2021-2022-2
+# Project: Time Evolving Networks
+## Scientific Modelling 2021-2022-2
 
 ## Advisor(s):
 
-    Péter Pál Pollner (Prof.)
+    Péter Pollner (Prof.)
     Palla Gergely (Prof.)
 
 # Deadlines:
 
-## Biweekly report 1 (report & presenation)
+## Biweekly report 1 (report & presentation)
 
     1 week
     DL: 21st of February
 
-## Biweekly report 2 (report & presenation)
+## Biweekly report 2 (report & presentation)
 
     2 weeks
     DL: 6th of March (22:00)
@@ -22,12 +23,12 @@
     3 weeks
     DL: 27th of March (22:00)
 
-## Biweekly report 3 (report & presenation)
+## Biweekly report 3 (report & presentation)
 
     2 weeks
     DL: 10th of April (22:00)
 
-## Biweekly report 4 (report & presenation)
+## Biweekly report 4 (report & presentation)
 
     2 weeks
     DL: 24th of April (22:00)
