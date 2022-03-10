@@ -45,3 +45,4 @@
     Didn't really find it in the API documentation while I have worked
     with ReST API before and making query with an url is not some alien 
     technology.
+    __SOLVED__
