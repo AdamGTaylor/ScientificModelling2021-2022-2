@@ -31,6 +31,10 @@ real_data_ana.ipynb
 
     https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0000501
 
+### Co-Authorship Networks In the Digital Library Research Community
+
+    https://arxiv.org/pdf/cs/0502056.pdf
+
 ## Data
 
     The data is downloaded and it takes up to 2.61 GB.
