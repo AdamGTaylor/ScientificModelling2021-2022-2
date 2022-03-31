@@ -91,6 +91,32 @@ real_data_ana.ipynb
     2 weeks
     DL: 8th of May (22:00)
 
+## NOTES (03.31.)
+
+Betweeness:
+
+    High betweeness, low degree means bridges.
+
+Multi-connected components:
+
+Core:
+
+    Which are the nodes that connected with X amount of edges.
+
+Bridges:
+
+    Would be handful to look at.
+
+PageRank:
+
+    Do me!
+
+Motive Statistics:
+
+    Group finding method on entrance level.
+
+After that we can try group finding methods. Don't touch embedding beforehand!
+
 
 ## ISSUES
 
