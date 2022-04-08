@@ -111,7 +111,7 @@ PageRank:
 
     Do me!
 
-Motive Statistics:
+Motif Statistics:
 
     Group finding method on entrance level.
 
