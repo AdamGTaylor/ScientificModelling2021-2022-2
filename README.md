@@ -93,6 +93,10 @@ real_data_ana.ipynb
 
 ## NOTES (03.31.)
 
+Assortativity:
+
+    
+
 Betweeness:
 
     High betweeness, low degree means bridges.
