@@ -1,1 +1,0 @@
-https://m2.mtmt.hu/api/publication?cond=published;eq;true&cond=core;eq;true&cond=institutes;inia;133&cond=category.mtid;eq;1&cond=publishedYear;range;2014%2C2023&sort=publishedYear,desc&sort=firstAuthor,asc&page=1&size=67027&labelLang=hun&cite_type=2
