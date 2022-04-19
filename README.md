@@ -35,6 +35,13 @@ real_data_ana.ipynb
 
     https://arxiv.org/pdf/cs/0502056.pdf
 
+
+## Speed Ups for finding motifs
+
+    1. Only finding a few
+    2. Choose the most meaningful motifs
+    3. Watch out for different 'type' of authors
+    
 ## Data
 
     The data is downloaded and it takes up to 2.61 GB.
