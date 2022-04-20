@@ -50,7 +50,7 @@ if __name__ == "__main__":
     answers = []
     start = timeit.default_timer()
     for i in range(4):
-        answers.append(calcSum(10,2e7))
+        calcSum(10,2e7)
     stop = timeit.default_timer()
     print('Time: ', stop - start) 
     
@@ -61,7 +61,8 @@ if __name__ == "__main__":
     r2 = pool.apply_async(calcSum, [10,2e7])
     r3 = pool.apply_async(calcSum, [10,2e7])
     r4 = pool.apply_async(calcSum, [10,2e7])
-
+    
+    
     ans1 = r1.get(timeout=10)
     ans2 = r2.get(timeout=10)
     ans3 = r3.get(timeout=10)
