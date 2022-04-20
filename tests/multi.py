@@ -48,25 +48,19 @@ class Multiprocessor():
 # tester
 if __name__ == "__main__":
     answers = []
+    s1 = 10
+    s2 = 2e7
     start = timeit.default_timer()
     for i in range(4):
-        calcSum(10,2e7)
+        calcSum(s1,s2)
     stop = timeit.default_timer()
     print('Time: ', stop - start) 
     
     pool = Pool(4)
 
     start = timeit.default_timer()
-    r1 = pool.apply_async(calcSum, [10,2e7])
-    r2 = pool.apply_async(calcSum, [10,2e7])
-    r3 = pool.apply_async(calcSum, [10,2e7])
-    r4 = pool.apply_async(calcSum, [10,2e7])
-    
-    
-    ans1 = r1.get(timeout=10)
-    ans2 = r2.get(timeout=10)
-    ans3 = r3.get(timeout=10)
-    ans4 = r4.get(timeout=10)
+    answers = pool.starmap(calcSum, [(s1,s2) for i in range(4)])
     stop = timeit.default_timer()
+    print(len(answers))
     
     print('Time: ', stop - start) 

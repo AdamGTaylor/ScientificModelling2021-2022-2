@@ -103,9 +103,9 @@ def calcRevelancy(graph,motifs_gen=generateMotifs, seed=726, random_num=5, rerol
         G_random_base.add_edges_from(G_a.edges)
         print("Generating randomized network number {}".format(i))
         randoms.append(nx.double_edge_swap(G_random_base,
-                                           nswap=int(reroll*len(list(G_random_base.edges))),
-                                           max_tries=200*int(reroll*len(list(G_random_base.edges))),
-                                           seed=seed-i))
+                                           int(reroll*len(list(G_random_base.edges))),
+                                           200*int(reroll*len(list(G_random_base.edges))),
+                                           seed-i))
     
     #containers
     motifs_order0 = []
@@ -157,6 +157,85 @@ def calcRevelancy(graph,motifs_gen=generateMotifs, seed=726, random_num=5, rerol
     
     return np.array(motifs_order0), np.array(motifs_match_count0)
 
+def generateRandomizedNetworks(graph,seed,reroll):
+    G_random_base = nx.Graph()
+    G_random_base.add_edges_from(graph.edges)
+    G_random_base = nx.double_edge_swap(G_random_base,
+                                        int(reroll*len(list(G_random_base.edges))),
+                                        200*int(reroll*len(list(G_random_base.edges))),
+                                        seed)
+    
+    return G_random_base
+
+def countIsoIters(graph,motif):
+    
+    cnt_r_i = 0
+
+    GM_r_iso = nx.algorithms.isomorphism.GraphMatcher(graph,motif)
+    #count how many matches it has with iter
+    for iso in GM_r_iso.subgraph_isomorphisms_iter():
+        cnt_r_i+=1
+    
+    return cnt_r_i
+
+def calcRevelancyParallel(graph,motifs_gen=generateMotifs, seed=726, random_num=5, reroll=0.3):
+    """
+    Gives the revelanvy of given motifs (Z SCORE)
+    (m_obs - m_rand_avg) / (sigma_rand)
+    Creates a Pool to draw workers from... (multiprocessing)
+    
+    INPUT:
+        graoh: graph object for comparison
+        motif_gen: func, generates motifs
+        seed= integer for seeding random choosings
+        random_num = amount of random networks to be generated
+        reroll= float, (0,1], how much percentage of the links should be remade
+    OUTPUT:
+        motifs_order: name of the motfis, motif_gen gives it
+        motifs_match_count: array for motifs found in graph, random generated graph and revelancy
+    """
+    #get the workers from the pool
+    pool = Pool(random_num+1)    
+    
+    #generate random graph
+    G_a = graph
+    #generate random_num random graphs (sufficient for my needs)
+    #parallelize the randomization
+    randoms = pool.starmap(generateRandomizedNetworks,
+                           [(G_a,seed-i,reroll) for i in range(random_num)])
+    #have to combine them together
+    graphs = list(randoms)
+    graphs.append(G_a)
+    
+    #containers
+    motifs_order0 = []
+    motifs_match_count0 = []
+    
+    motifs = motifs_gen()
+    #print(motifs)
+        
+    #let's have the subgraph matchers
+    for i in motifs:       
+        funs = [(graphs[j], i[1]) for j in range(len(graphs))]
+        #print(funs)
+        
+        sys.stdout.write("\rAt {}\t\t".format(i[0]))
+        sys.stdout.flush()
+        
+        motifs_in_graphs = pool.starmap(countIsoIters, funs)
+        
+        motifs_order0.append([i[0]])
+        revelancy = 0
+        if not (np.var(motifs_in_graphs[:-1]) == 0):
+            revelancy = (motifs_in_graphs[-1] - np.mean(motifs_in_graphs[:-1]))/(np.var(motifs_in_graphs[:-1])**(1/2))
+
+        motifs_match_count0.append([motifs_in_graphs[-1], np.mean(motifs_in_graphs[:-1]), revelancy])
+    
+    print("\nFinished")
+    
+    return np.array(motifs_order0), np.array(motifs_match_count0)
+
+
 #main to run main
 if __name__ == "__main__":
     
@@ -176,6 +255,14 @@ if __name__ == "__main__":
     start = timeit.default_timer()
     m_o, m_m_c = calcRevelancy(G)
     stop = timeit.default_timer()
-    print('Time: ', stop - start) 
     
+    
+    start2 = timeit.default_timer()
+    m_o2, m_m_c2 = calcRevelancyParallel(G)
+    stop2 = timeit.default_timer()
+    
+    print("\nTime in single-threaded: " + str(stop - start) +
+          "\nTime in multiprocessing: " + str(stop2 - start2) +
+          "\nAchieved speedup: " + str((stop-start) / (stop2-start2))
+         ) 
     print("Finished running!")
