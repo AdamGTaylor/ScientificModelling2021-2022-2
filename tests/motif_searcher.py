@@ -22,7 +22,12 @@ from multiprocessing import Process, Queue, Pool
 
 
 #define functions
-def generateMotifs():
+def generateMotifsX():
+    """
+    Generates motifs using networkx
+    """
+    
+    
     motifs = [];
     #3 nodes (2)
     motifs.append(['M31',nx.Graph()]); motifs.append(['M32',nx.Graph()])
@@ -79,7 +84,7 @@ def generateMotifs():
     
     return motifs
 
-def calcRevelancy(graph,motifs_gen=generateMotifs, seed=726, random_num=5, reroll=0.3):
+def calcRevelancy(graph,motifs_gen=generateMotifsX, seed=726, random_num=5, reroll=0.3):
     """
     Gives the revelanvy of given motifs (Z SCORE)
     (m_obs - m_rand_avg) / (sigma_rand)
@@ -178,7 +183,7 @@ def countIsoIters(graph,motif):
     
     return cnt_r_i
 
-def calcRevelancyParallel(graph,motifs_gen=generateMotifs, seed=726, random_num=5, reroll=0.3):
+def calcRevelancyParallel(graph,motifs_gen=generateMotifsX, seed=726, random_num=5, reroll=0.3):
     """
     Gives the revelanvy of given motifs (Z SCORE)
     (m_obs - m_rand_avg) / (sigma_rand)
@@ -241,8 +246,9 @@ if __name__ == "__main__":
     
     #load in the file
     print("Loading")
-    with open("../partial_results/second_largest_component.npy", "rb") as f:
-        second_comp_links = np.load(f)
+    #multi_sources_undirected_linklist
+    with open("../SciMod/partial_results/multi_sources_undirected_linklist.txt", "rb") as f:
+        second_comp_links = np.loadtxt(f)
         
     print("Loading finished")
     
@@ -250,19 +256,23 @@ if __name__ == "__main__":
     G = nx.Graph()                      #create graph
     G.add_edges_from(second_comp_links) #add egdes
     
+
     print(len(list(G.nodes)), len(list(G.edges) ) )
-    
+    """
     start = timeit.default_timer()
     m_o, m_m_c = calcRevelancy(G)
     stop = timeit.default_timer()
-    
+    """
     
     start2 = timeit.default_timer()
     m_o2, m_m_c2 = calcRevelancyParallel(G)
     stop2 = timeit.default_timer()
     
-    print("\nTime in single-threaded: " + str(stop - start) +
-          "\nTime in multiprocessing: " + str(stop2 - start2) +
-          "\nAchieved speedup: " + str((stop-start) / (stop2-start2))
+    print(#"\nTime in single-threaded (netx): " + str(stop - start) +
+          "\nTime in multiprocessing (netx): " + str(stop2 - start2) #+
+          #"\nAchieved speedup: " + str((stop-start) / (stop2-start2))
          ) 
+    
+    with open("../Scimod/partial_results/motif_finding_results.npy", "wb") as f:
+        second_comp_links = np.save(f, m_m_c2)
     print("Finished running!")

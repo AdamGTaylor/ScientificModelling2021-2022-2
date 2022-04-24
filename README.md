@@ -41,6 +41,10 @@ real_data_ana.ipynb
     1. Only finding a few
     2. Choose the most meaningful motifs
     3. Watch out for different 'type' of authors
+
+## Projection 
+
+    ELTE Faculty of Natural Sciences as projection 
     
 ## Data
 
