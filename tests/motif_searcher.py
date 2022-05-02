@@ -244,10 +244,16 @@ def calcRevelancyParallel(graph,motifs_gen=generateMotifsX, seed=726, random_num
 #main to run main
 if __name__ == "__main__":
     
+    #get the path from argument
+    args = list(sys.argv)[1:]
+    
+    assert len(args) > 1;
+    
     #load in the file
     print("Loading")
     #multi_sources_undirected_linklist
-    with open("../SciMod/partial_results/multi_sources_undirected_linklist.txt", "rb") as f:
+    #"../SciMod/partial_results/multi_sources_undirected_linklist.txt"
+    with open(args[0], "rb") as f:
         second_comp_links = np.loadtxt(f)
         
     print("Loading finished")
@@ -273,6 +279,12 @@ if __name__ == "__main__":
           #"\nAchieved speedup: " + str((stop-start) / (stop2-start2))
          ) 
     
-    with open("../Scimod/partial_results/motif_finding_results.npy", "wb") as f:
+    #"../Scimod/partial_results/motif_finding_results.npy"
+    with open(args[1], "wb") as f:
         second_comp_links = np.save(f, m_m_c2)
+        
+    info_file =  open("../SciMod/partial_results/subgraph_motifs/test_file.txt", "a")
+    info_file.write("{}, {}, {}\n".format((stop2 - start2),len(G.nodes), len(G.edges) ) ) 
+    info_file.close()
+    
     print("Finished running!")
