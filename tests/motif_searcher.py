@@ -283,7 +283,7 @@ if __name__ == "__main__":
     with open(args[1], "wb") as f:
         second_comp_links = np.save(f, m_m_c2)
         
-    info_file =  open("../SciMod/partial_results/subgraph_motifs/test_file.txt", "a")
+    info_file =  open(args[2], "a")
     info_file.write("{}, {}, {}\n".format((stop2 - start2),len(G.nodes), len(G.edges) ) ) 
     info_file.close()
     
